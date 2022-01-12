@@ -19,7 +19,6 @@ module vikop2app {
     opens dev.mantas.vikop2app.ui.admin to javafx.fxml;
     exports dev.mantas.vikop2app.ui.admin;
 
-    exports dev.mantas.vikop2app;
     exports dev.mantas.vikop2app.data.dao;
     exports dev.mantas.vikop2app.data.dao.impl.memory;
     exports dev.mantas.vikop2app.data.dao.impl.memory.util;
