@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0"
+      prefWidth="1280.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="dev.mantas.vikop2app.ui.admin.AdminController">
+    <children>
+        <HBox alignment="TOP_RIGHT" prefHeight="100.0" prefWidth="1280.0">
+            <children>
+                <VBox alignment="TOP_RIGHT" prefHeight="72.0" prefWidth="1288.0">
+                    <children>
+                        <Label fx:id="fieldUserName" alignment="CENTER_RIGHT" text="Vardenis Pavardenis"
+                               textAlignment="RIGHT">
+                            <font>
+                                <Font size="18.0"/>
+                            </font>
+                            <VBox.margin>
+                                <Insets right="12.0" top="12.0"/>
+                            </VBox.margin>
+                        </Label>
+                        <Label alignment="CENTER_RIGHT" text="Administratorius">
+                            <font>
+                                <Font size="14.0"/>
+                            </font>
+                            <VBox.margin>
+                                <Insets right="12.0"/>
+                            </VBox.margin>
+                        </Label>
+                        <Button fx:id="btnLogOut" mnemonicParsing="false" onAction="#onLogOut" prefHeight="27.0"
+                                prefWidth="100.0" style="-fx-background-color: #FF9494;" text="Atsijungti"
+                                textAlignment="CENTER">
+                            <VBox.margin>
+                                <Insets bottom="12.0" right="12.0" top="2.0"/>
+                            </VBox.margin>
+                        </Button>
+                    </children>
+                </VBox>
+            </children>
+        </HBox>
+        <TabPane fx:id="table" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="671.0"
+                 prefWidth="1280.0" tabClosingPolicy="UNAVAILABLE" VBox.vgrow="ALWAYS">
+            <tabs>
+                <Tab fx:id="tabStudents" onSelectionChanged="#onFocusStudents" text="Studentai">
+                    <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0"
+                                    style="-fx-background-color: #dddddd;">
+                            <children>
+                                <TableView fx:id="tableStudents" layoutY="55.0" prefHeight="430.0" prefWidth="1280.0"
+                                           AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
+                                           AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="50.0">
+                                    <columns>
+                                        <TableColumn prefWidth="193.0" text="Vardas"/>
+                                        <TableColumn prefWidth="201.0" text="Pavardė"/>
+                                        <TableColumn prefWidth="165.0" text="Grupė"/>
+                                    </columns>
+                                </TableView>
+                                <Button layoutX="6.0" layoutY="12.0" mnemonicParsing="false" onAction="#onCreateStudent"
+                                        prefHeight="25.0" prefWidth="160.0" style="-fx-background-color: #94FFAD;"
+                                        text="Pridėti studentą"/>
+                            </children>
+                        </AnchorPane>
+                    </content>
+                </Tab>
+                <Tab fx:id="tabStudentGroups" onSelectionChanged="#onFocusStudentGroups" text="Studentų grupės">
+                    <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0"
+                                    style="-fx-background-color: #dddddd;">
+                            <children>
+                                <TableView fx:id="tableStudentGroups" layoutY="31.0" prefHeight="536.0"
+                                           prefWidth="1280.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
+                                           AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="50.0">
+                                    <columns>
+                                        <TableColumn prefWidth="339.0" text="Pavadinimas"/>
+                                    </columns>
+                                </TableView>
+                                <Button layoutX="6.0" layoutY="12.0" mnemonicParsing="false"
+                                        onAction="#onCreateStudentGroup" prefHeight="25.0" prefWidth="160.0"
+                                        style="-fx-background-color: #94FFAD;" text="Pridėti studentų grupę"/>
+                            </children>
+                        </AnchorPane>
+                    </content>
+                </Tab>
+                <Tab fx:id="tabTeachers" onSelectionChanged="#onFocusTeachers" text="Dėstytojai">
+                    <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0"
+                                    style="-fx-background-color: #dddddd;">
+                            <children>
+                                <TableView fx:id="tableTeachers" layoutY="30.0" prefHeight="495.0" prefWidth="1226.0"
+                                           AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
+                                           AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="50.0">
+                                    <columns>
+                                        <TableColumn prefWidth="170.0" text="Laipsnis"/>
+                                        <TableColumn minWidth="0.0" prefWidth="180.0" text="Vardas"/>
+                                        <TableColumn minWidth="0.0" prefWidth="219.0" text="Pavardė"/>
+                                        <TableColumn minWidth="0.0" prefWidth="411.0" text="Dalykas"/>
+                                    </columns>
+                                </TableView>
+                                <Button layoutX="6.0" layoutY="12.0" mnemonicParsing="false" onAction="#onCreateTeacher"
+                                        prefHeight="25.0" prefWidth="160.0" style="-fx-background-color: #94FFAD;"
+                                        text="Pridėti dėstytoją"/>
+                            </children>
+                        </AnchorPane>
+                    </content>
+                </Tab>
+                <Tab fx:id="tabSubjects" onSelectionChanged="#onFocusSubjects" text="Dalykai">
+                    <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0"
+                                    style="-fx-background-color: #dddddd;">
+                            <children>
+                                <TableView fx:id="tableSubjects" layoutY="29.0" prefHeight="538.0" prefWidth="1280.0"
+                                           AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
+                                           AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="50.0">
+                                    <columns>
+                                        <TableColumn prefWidth="339.0" text="Pavadinimas"/>
+                                    </columns>
+                                </TableView>
+                                <Button layoutX="6.0" layoutY="12.0" mnemonicParsing="false" onAction="#onCreateSubject"
+                                        prefHeight="25.0" prefWidth="160.0" style="-fx-background-color: #94FFAD;"
+                                        text="Pridėti dalyką"/>
+                            </children>
+                        </AnchorPane>
+                    </content>
+                </Tab>
+            </tabs>
+        </TabPane>
+    </children>
+</VBox>

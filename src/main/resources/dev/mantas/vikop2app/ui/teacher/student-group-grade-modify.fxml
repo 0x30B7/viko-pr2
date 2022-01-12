@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0"
+      prefWidth="1280.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="dev.mantas.vikop2app.ui.teacher.StudentGroupGradeModifyController">
+    <children>
+        <HBox alignment="TOP_RIGHT" prefHeight="100.0" prefWidth="1280.0">
+            <children>
+                <VBox alignment="TOP_RIGHT" prefHeight="72.0" prefWidth="1288.0">
+                    <children>
+                        <Label fx:id="fieldUserName" alignment="CENTER_RIGHT" text="Vardenis Pavardenis"
+                               textAlignment="RIGHT">
+                            <font>
+                                <Font size="18.0"/>
+                            </font>
+                            <VBox.margin>
+                                <Insets right="12.0" top="12.0"/>
+                            </VBox.margin>
+                        </Label>
+                        <Label fx:id="fieldOccupation" alignment="CENTER_RIGHT" text="Dėstytojas">
+                            <font>
+                                <Font name="Segoe UI" size="14.0"/>
+                            </font>
+                            <VBox.margin>
+                                <Insets right="12.0"/>
+                            </VBox.margin>
+                        </Label>
+                        <Button fx:id="btnLogOut" mnemonicParsing="false" onAction="#onLogOut" prefHeight="27.0"
+                                prefWidth="100.0" style="-fx-background-color: #FF9494;" text="Atsijungti"
+                                textAlignment="CENTER">
+                            <VBox.margin>
+                                <Insets bottom="12.0" right="12.0" top="2.0"/>
+                            </VBox.margin>
+                        </Button>
+                    </children>
+                </VBox>
+            </children>
+        </HBox>
+        <HBox prefHeight="28.0" prefWidth="1280.0" spacing="15.0">
+            <children>
+                <Label onMouseClicked="#onBackHome" text="Pažymiai" textFill="#0d36c9" underline="true">
+                    <font>
+                        <Font name="Segoe UI" size="14.0"/>
+                    </font>
+                    <HBox.margin>
+                        <Insets bottom="6.0" left="6.0" top="6.0"/>
+                    </HBox.margin>
+                    <cursor>
+                        <Cursor fx:constant="HAND"/>
+                    </cursor>
+                </Label>
+                <Label text="-">
+                    <font>
+                        <Font name="Segoe UI" size="14.0"/>
+                    </font>
+                    <HBox.margin>
+                        <Insets bottom="6.0" top="6.0"/>
+                    </HBox.margin>
+                </Label>
+                <Label fx:id="btnGradeName" onMouseClicked="#onBackGrades" text="Pavadinimas" textFill="#0d36c9"
+                       underline="true">
+                    <font>
+                        <Font name="Segoe UI" size="14.0"/>
+                    </font>
+                    <HBox.margin>
+                        <Insets bottom="6.0" top="6.0"/>
+                    </HBox.margin>
+                    <cursor>
+                        <Cursor fx:constant="HAND"/>
+                    </cursor>
+                </Label>
+                <Label text="-">
+                    <font>
+                        <Font name="Segoe UI" size="14.0"/>
+                    </font>
+                    <HBox.margin>
+                        <Insets bottom="6.0" top="6.0"/>
+                    </HBox.margin>
+                </Label>
+                <Label fx:id="btnGroupName" text="Grupė">
+                    <font>
+                        <Font name="Segoe UI" size="14.0"/>
+                    </font>
+                    <HBox.margin>
+                        <Insets bottom="6.0" top="6.0"/>
+                    </HBox.margin>
+                </Label>
+            </children>
+        </HBox>
+        <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="160.0" style="-fx-background-color: #dddddd;"
+                textFill="#868686">
+            <VBox.margin>
+                <Insets left="6.0"/>
+            </VBox.margin>
+        </Button>
+        <TableView fx:id="tableStudentGrades" prefHeight="598.0" prefWidth="1280.0" VBox.vgrow="ALWAYS">
+            <columns>
+                <TableColumn prefWidth="175.0" text="Vardas"/>
+                <TableColumn prefWidth="175.0" text="Pavardė"/>
+            </columns>
+            <VBox.margin>
+                <Insets top="12.0"/>
+            </VBox.margin>
+        </TableView>
+    </children>
+</VBox>

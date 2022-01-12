@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0"
+      prefWidth="1280.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="dev.mantas.vikop2app.ui.admin.TeacherCreateController">
+    <children>
+        <HBox alignment="TOP_RIGHT" prefHeight="100.0" prefWidth="1280.0">
+            <children>
+                <VBox alignment="TOP_RIGHT" prefHeight="72.0" prefWidth="1280.0">
+                    <children>
+                        <Label fx:id="fieldUserName" alignment="CENTER_RIGHT" text="Vardenis Pavardenis"
+                               textAlignment="RIGHT">
+                            <font>
+                                <Font size="18.0"/>
+                            </font>
+                            <VBox.margin>
+                                <Insets right="12.0" top="12.0"/>
+                            </VBox.margin>
+                        </Label>
+                        <Label alignment="CENTER_RIGHT" text="Administratorius">
+                            <font>
+                                <Font size="14.0"/>
+                            </font>
+                            <VBox.margin>
+                                <Insets right="12.0"/>
+                            </VBox.margin>
+                        </Label>
+                        <Button fx:id="btnLogOut" mnemonicParsing="false" onAction="#onLogOut" prefHeight="27.0"
+                                prefWidth="100.0" style="-fx-background-color: #FF9494;" text="Atsijungti"
+                                textAlignment="CENTER">
+                            <VBox.margin>
+                                <Insets bottom="12.0" right="12.0" top="2.0"/>
+                            </VBox.margin>
+                        </Button>
+                    </children>
+                </VBox>
+            </children>
+        </HBox>
+
+        <HBox maxHeight="1.7976931348623157E308" VBox.vgrow="ALWAYS">
+            <children>
+                <VBox alignment="CENTER_RIGHT" maxHeight="1.7976931348623157E308" HBox.hgrow="SOMETIMES">
+                    <children>
+                        <Label layoutX="449.0" layoutY="184.0" prefWidth="320.0" text="Asmens kodas">
+                            <font>
+                                <Font name="Segoe UI" size="16.0"/>
+                            </font>
+                        </Label>
+                        <TextField fx:id="inputId" layoutX="449.0" layoutY="203.0" maxWidth="-Infinity"
+                                   prefHeight="25.0" prefWidth="320.0"/>
+                        <Label layoutX="449.0" layoutY="238.0" prefWidth="320.0" text="Vardas">
+                            <font>
+                                <Font name="Segoe UI" size="16.0"/>
+                            </font>
+                            <VBox.margin>
+                                <Insets top="12.0"/>
+                            </VBox.margin>
+                        </Label>
+                        <TextField fx:id="inputName" layoutX="449.0" layoutY="257.0" maxWidth="-Infinity"
+                                   prefHeight="25.0" prefWidth="320.0"/>
+                        <Label layoutX="449.0" layoutY="292.0" prefWidth="320.0" text="Pavardė">
+                            <font>
+                                <Font name="Segoe UI" size="16.0"/>
+                            </font>
+                            <VBox.margin>
+                                <Insets top="12.0"/>
+                            </VBox.margin>
+                        </Label>
+                        <TextField fx:id="inputLastName" layoutX="449.0" layoutY="311.0" maxWidth="-Infinity"
+                                   prefHeight="25.0" prefWidth="320.0"/>
+                        <Label layoutX="449.0" layoutY="346.0" prefWidth="320.0" text="Laipsnis">
+                            <font>
+                                <Font name="Segoe UI" size="16.0"/>
+                            </font>
+                            <VBox.margin>
+                                <Insets top="12.0"/>
+                            </VBox.margin>
+                        </Label>
+                        <ComboBox fx:id="inputStatus" layoutX="449.0" layoutY="365.0" prefHeight="25.0"
+                                  prefWidth="320.0"/>
+                    </children>
+                    <HBox.margin>
+                        <Insets right="12.0"/>
+                    </HBox.margin>
+                    <padding>
+                        <Insets bottom="61.0"/>
+                    </padding>
+                </VBox>
+                <VBox alignment="CENTER_LEFT" maxHeight="1.7976931348623157E308" HBox.hgrow="SOMETIMES">
+                    <children>
+                        <Label layoutX="659.0" layoutY="184.0" maxWidth="-Infinity" prefWidth="320.0" text="El. paštas">
+                            <font>
+                                <Font name="Segoe UI" size="16.0"/>
+                            </font>
+                        </Label>
+                        <TextField fx:id="inputEmail" layoutX="659.0" layoutY="203.0" maxWidth="-Infinity"
+                                   prefHeight="25.0" prefWidth="320.0"/>
+                        <Label layoutX="659.0" layoutY="238.0" prefWidth="320.0" text="Kabinetas">
+                            <font>
+                                <Font name="Segoe UI" size="16.0"/>
+                            </font>
+                            <VBox.margin>
+                                <Insets top="12.0"/>
+                            </VBox.margin>
+                        </Label>
+                        <TextField fx:id="inputRoom" layoutX="659.0" layoutY="257.0" maxWidth="-Infinity"
+                                   prefHeight="25.0" prefWidth="320.0"/>
+                        <Label layoutX="659.0" layoutY="292.0" prefWidth="320.0" text="Dėstomas dalykas">
+                            <font>
+                                <Font name="Segoe UI" size="16.0"/>
+                            </font>
+                            <VBox.margin>
+                                <Insets top="12.0"/>
+                            </VBox.margin>
+                        </Label>
+                        <ComboBox fx:id="inputSubject" prefHeight="25.0" prefWidth="320.0">
+                            <VBox.margin>
+                                <Insets bottom="117.0"/>
+                            </VBox.margin>
+                        </ComboBox>
+                    </children>
+                    <HBox.margin>
+                        <Insets left="12.0"/>
+                    </HBox.margin>
+                </VBox>
+            </children>
+        </HBox>
+        <HBox alignment="TOP_CENTER" prefHeight="104.0" prefWidth="1280.0" spacing="12.0" VBox.vgrow="ALWAYS">
+            <children>
+                <Button fx:id="btnSubmit" mnemonicParsing="false" onAction="#onConfirm" prefHeight="25.0"
+                        prefWidth="173.0" text="Sukurti"/>
+                <Button fx:id="btnCancel" mnemonicParsing="false" onAction="#onCancel" prefHeight="25.0"
+                        prefWidth="173.0" text="Atšaukti"/>
+            </children>
+            <VBox.margin>
+                <Insets/>
+            </VBox.margin>
+        </HBox>
+    </children>
+</VBox>

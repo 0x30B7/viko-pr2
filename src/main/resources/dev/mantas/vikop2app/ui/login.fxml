@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+      prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="dev.mantas.vikop2app.ui.LoginController">
+    <children>
+        <VBox alignment="CENTER_LEFT" layoutX="461.0" layoutY="10.0" prefHeight="720.0" prefWidth="378.0"
+              spacing="10.0">
+            <children>
+                <Label prefHeight="28.0" prefWidth="380.0" text="Prisijungimo vardas">
+                    <font>
+                        <Font name="Segoe UI" size="16.0"/>
+                    </font>
+                </Label>
+                <TextField fx:id="fieldUsername" prefHeight="26.0" prefWidth="236.0">
+                    <opaqueInsets>
+                        <Insets top="50.0"/>
+                    </opaqueInsets>
+                </TextField>
+                <Label prefHeight="28.0" prefWidth="380.0" text="Slaptažodis">
+                    <font>
+                        <Font name="Segoe UI" size="16.0"/>
+                    </font>
+                </Label>
+                <PasswordField fx:id="fieldPassword"/>
+                <HBox alignment="CENTER" prefHeight="31.0" prefWidth="378.0">
+                    <children>
+                        <Button fx:id="btnLogin" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false"
+                                onAction="#onLogin" prefHeight="30.0" prefWidth="179.0" text="Prisijungti"/>
+                    </children>
+                    <opaqueInsets>
+                        <Insets top="20.0"/>
+                    </opaqueInsets>
+                </HBox>
+            </children>
+        </VBox>
+    </children>
+    <opaqueInsets>
+        <Insets top="20.0"/>
+    </opaqueInsets>
+</HBox>
