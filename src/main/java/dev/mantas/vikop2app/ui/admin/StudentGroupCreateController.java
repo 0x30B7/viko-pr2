@@ -15,6 +15,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -92,19 +93,30 @@ public class StudentGroupCreateController implements Initializable {
                 .map(entry -> entry.getSubject().getId())
                 .collect(Collectors.toList());
 
+        if (title != null) {
+            title = title.trim();
+        }
+
+        if (title == null || title.length() == 0) {
+            AlertUtil.alert(Alert.AlertType.ERROR, "Nepavyko sukurti naujos studentų grupės:",
+                    "Studentų grupė privalo turėti netuščią pavadinimą");
+            return;
+        }
+
         btnSubmit.setDisable(true);
         btnCancel.setDisable(true);
 
+        String finalTitle = title;
         AsyncTask.async(() -> {
-            StudentGroup exist = studentGroupDao.getByTitle(title);
+            StudentGroup exist = studentGroupDao.getByTitle(finalTitle);
             if (exist != null) {
                 return false;
             }
 
-            studentGroupDao.createStudentGroup(title, now);
+            studentGroupDao.createStudentGroup(finalTitle, now);
 
             if (!selectedSubjects.isEmpty()) {
-                StudentGroup studentGroup = studentGroupDao.getByTitle(title);
+                StudentGroup studentGroup = studentGroupDao.getByTitle(finalTitle);
                 studentGroupSubjectLinkDao.attachSubjectsToStudentGroup(selectedSubjects, studentGroup.getId());
             }
             return true;

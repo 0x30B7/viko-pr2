@@ -15,6 +15,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -104,12 +105,23 @@ public class StudentGroupModifyController implements Initializable {
                 .map(entry -> entry.getSubject().getId())
                 .collect(Collectors.toList());
 
+        if (title != null) {
+            title = title.trim();
+        }
+
+        if (title == null || title.length() == 0) {
+            AlertUtil.alert(Alert.AlertType.ERROR, "Nepavyko modifikuoti naujos studentų grupės:",
+                    "Studentų grupė privalo turėti netuščią pavadinimą");
+            return;
+        }
+
         btnSubmit.setDisable(true);
         btnCancel.setDisable(true);
 
+        String finalTitle = title;
         AsyncTask.async(() -> {
-            if (!title.equalsIgnoreCase(studentGroup.getTitle())) {
-                StudentGroup exist = studentGroupDao.getByTitle(title);
+            if (!finalTitle.equalsIgnoreCase(studentGroup.getTitle())) {
+                StudentGroup exist = studentGroupDao.getByTitle(finalTitle);
                 if (exist != null) {
                     return false;
                 }
@@ -120,7 +132,7 @@ public class StudentGroupModifyController implements Initializable {
                 return false;
             }
 
-            studentGroupDao.updateStudentGroup(studentGroup.getId(), title);
+            studentGroupDao.updateStudentGroup(studentGroup.getId(), finalTitle);
 
             studentGroupSubjectLinkDao.detachAllSubjectsFromStudentGroup(studentGroup.getId());
             if (!selectedSubjects.isEmpty()) {

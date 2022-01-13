@@ -60,16 +60,33 @@ public class SubjectCreateController implements Initializable {
         Date now = Date.from(Instant.now());
         String title = inputTitle.getText();
 
+        if (title != null) {
+            title = title.trim();
+        }
+
+        if (title == null || title.length() == 0) {
+            AlertUtil.alert(AlertType.ERROR, "Nepavyko sukurti naujo dalyko:",
+                    "Dalykas privalo turėti netuščią pavadinimą");
+            return;
+        }
+
+        if ("-".equals(title)) {
+            AlertUtil.alert(AlertType.ERROR, "Nepavyko sukurti naujo dalyko:",
+                    "Toks dalyko pavadinimas yra išskirtinai neleidžiamas.");
+            return;
+        }
+
         btnSubmit.setDisable(true);
         btnCancel.setDisable(true);
 
+        String finalTitle = title;
         AsyncTask.async(() -> {
-            Subject existByName = subjectDao.getSubjectByTitle(title);
+            Subject existByName = subjectDao.getSubjectByTitle(finalTitle);
             if (existByName != null) {
                 return false;
             }
 
-            subjectDao.createSubject(title);
+            subjectDao.createSubject(finalTitle);
             return true;
         }).then((success) -> {
             if (!success) {

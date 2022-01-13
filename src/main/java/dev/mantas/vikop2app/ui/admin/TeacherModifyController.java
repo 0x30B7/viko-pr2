@@ -9,6 +9,7 @@ import dev.mantas.vikop2app.model.Admin;
 import dev.mantas.vikop2app.model.LecturerStatus;
 import dev.mantas.vikop2app.model.Subject;
 import dev.mantas.vikop2app.model.Teacher;
+import dev.mantas.vikop2app.model.helper.TeacherWithSubject;
 import dev.mantas.vikop2app.ui.common.converter.LecturerStatusStringConverter;
 import dev.mantas.vikop2app.ui.common.converter.SubjectStringConverter;
 import dev.mantas.vikop2app.ui.util.AlertUtil;
@@ -24,15 +25,20 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.util.Pair;
 
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 import java.util.ResourceBundle;
+import java.util.stream.Collectors;
 
 import static dev.mantas.vikop2app.util.TextUtil.capitalize;
 
 public class TeacherModifyController implements Initializable {
+
+    private static final Subject UNLINK_SUBJECT = new Subject(-1, "-");
 
     @FXML
     private Label fieldUserName;
@@ -90,9 +96,30 @@ public class TeacherModifyController implements Initializable {
         }).execute();
 
         AsyncTask.async(() -> {
-            return subjectDao.getAllSubjects();
-        }).then((statuses) -> {
-            validSubjects.setAll(statuses);
+            List<Subject> allSubjects = subjectDao.getAllSubjects();
+            List<TeacherWithSubject> teacherSubjectLinks = teacherSubjectLinkDao.getAllTeachersWithOptSubjects();
+            return new Pair<>(allSubjects, teacherSubjectLinks);
+        }).then((result) -> {
+            List<Subject> subjectsWithoutATeacher = new ArrayList<>();
+            List<TeacherWithSubject> teacherWithExistingSubjectList = result.getValue().stream()
+                    .filter(link -> link.getSubject() != null).collect(Collectors.toList());
+
+            top:
+            for (Subject subject : result.getKey()) {
+                for (TeacherWithSubject teacherWithSubject : teacherWithExistingSubjectList) {
+                    if (subject.equals(teacherWithSubject.getSubject())) {
+                        continue top;
+                    }
+                }
+
+                subjectsWithoutATeacher.add(subject);
+            }
+
+            List<Subject> finalResult = new ArrayList<>(subjectsWithoutATeacher.size() + 1);
+            finalResult.add(UNLINK_SUBJECT);
+            finalResult.addAll(subjectsWithoutATeacher);
+
+            validSubjects.setAll(finalResult);
         }).execute();
     }
 
@@ -118,7 +145,7 @@ public class TeacherModifyController implements Initializable {
         AsyncTask.async(() -> {
             return teacherSubjectLinkDao.getSubjectByTeacherId(teacher.getId());
         }).then((subject) -> {
-            if (subject != null && validSubjects.contains(subject)) {
+            if (subject != null) {
                 inputSubject.getSelectionModel().select(subject);
             }
         }).execute();
@@ -145,7 +172,10 @@ public class TeacherModifyController implements Initializable {
 
             if (subject != null) {
                 teacherSubjectLinkDao.detachSubjectFromTeacher(teacher.getId());
-                teacherSubjectLinkDao.attachSubjectToTeacher(teacher.getId(), subject.getId());
+
+                if (subject != UNLINK_SUBJECT) {
+                    teacherSubjectLinkDao.attachSubjectToTeacher(teacher.getId(), subject.getId());
+                }
             }
 
             teacherDao.updateTeacher(teacher.getId(), name.toLowerCase(Locale.ROOT), lastName.toLowerCase(Locale.ROOT),

@@ -66,12 +66,29 @@ public class SubjectModifyController implements Initializable {
         Date now = Date.from(Instant.now());
         String title = inputTitle.getText();
 
+        if (title != null) {
+            title = title.trim();
+        }
+
+        if (title == null || title.length() == 0) {
+            AlertUtil.alert(Alert.AlertType.ERROR, "Nepavyko modifikuoti naujo dalyko:",
+                    "Dalykas privalo turėti netuščią pavadinimą");
+            return;
+        }
+
+        if ("-".equals(title)) {
+            AlertUtil.alert(Alert.AlertType.ERROR, "Nepavyko modifikuoti naujo dalyko:",
+                    "Toks dalyko pavadinimas yra išskirtinai neleidžiamas.");
+            return;
+        }
+
         btnSubmit.setDisable(true);
         btnCancel.setDisable(true);
 
+        String finalTitle = title;
         AsyncTask.async(() -> {
-            if (!title.equalsIgnoreCase(subject.getTitle())) {
-                Subject existByName = subjectDao.getSubjectByTitle(title);
+            if (!finalTitle.equalsIgnoreCase(subject.getTitle())) {
+                Subject existByName = subjectDao.getSubjectByTitle(finalTitle);
                 if (existByName != null) {
                     return false;
                 }
@@ -82,7 +99,7 @@ public class SubjectModifyController implements Initializable {
                 return false;
             }
 
-            subjectDao.updateSubject(subject.getId(), title);
+            subjectDao.updateSubject(subject.getId(), finalTitle);
             return true;
         }).then((success) -> {
             if (!success) {

@@ -11,6 +11,7 @@ import dev.mantas.vikop2app.util.async.AsyncTask;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -67,16 +68,27 @@ public class GradeCreateController implements Initializable {
         Date now = Date.from(Instant.now());
         String title = inputTitle.getText();
 
+        if (title != null) {
+            title = title.trim();
+        }
+
+        if (title == null || title.length() == 0) {
+            AlertUtil.alert(Alert.AlertType.ERROR, "Nepavyko sukurti naujo pažymio:",
+                    "Pažymys privalo turėti netuščią pavadinimą");
+            return;
+        }
+
         btnSubmit.setDisable(true);
         btnCancel.setDisable(true);
 
+        String finalTitle = title;
         AsyncTask.async(() -> {
-            Grade exist = gradeDao.getGradeByTitleAndSubjectId(title, subject.getId());
+            Grade exist = gradeDao.getGradeByTitleAndSubjectId(finalTitle, subject.getId());
             if (exist != null) {
                 return false;
             }
 
-            gradeDao.createGrade(now, title, subject.getId());
+            gradeDao.createGrade(now, finalTitle, subject.getId());
             return true;
         }).then((success) -> {
             if (!success) {
